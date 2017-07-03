@@ -39,6 +39,7 @@ export const CreateNestedStyleSheet = (nestedStyles,loop)=>{
             styleTree[key] = styleObj;
 
         }
+
     }
 
     toStyle = StyleSheet.create(toStyle);
@@ -67,7 +68,7 @@ export const GetStyleValueById = (id)=>{
 
 };
 
-export const GetStyle = (styleSet,state,adHoc)=>{
+export const GetStyle = (styleSet,adHoc,state)=>{
 
     let style = typeof styleSet==="string"?(styles[styleSet]?styles[styleSet]:{}):styleSet;
 

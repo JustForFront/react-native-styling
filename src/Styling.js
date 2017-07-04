@@ -10,29 +10,25 @@ export const CreateNestedStyleSheet = (nestedStyles,loop)=>{
         styleObj = nestedStyles[key];
         styleObjKeys = Object.keys(styleObj);
 
-        if (typeof styleObj[styleObjKeys[0]] === 'object') {
+        if(typeof styleObj.transition!=="undefined"){
 
-            if(typeof styleObj.transition==="undefined"){
+            let obj = {...styleObj};
 
-                nodesName.push(key);
+            delete obj.transition;
 
-                result[key] = CreateNestedStyleSheet(styleObj,true);
+            toStyle[key] = obj;
 
-                nodesName.pop();
+            styleTree[key] = styleObj;
 
-            }else{
+        }else if (typeof styleObj[styleObjKeys[0]] === 'object'&&styleObjKeys[0]!=="transform"&&styleObjKeys[0]!=="transformMatrix") {
 
-                let obj = {...styleObj};
+            nodesName.push(key);
 
-                delete obj.transition;
+            result[key] = CreateNestedStyleSheet(styleObj,true);
 
-                toStyle[key] = obj;
+            nodesName.pop();
 
-                styleTree[key] = styleObj;
-
-            }
-
-        } else {
+        }else{
 
             toStyle[key] = styleObj;
 
